@@ -1,0 +1,64 @@
+Problema 1: DEPORTES UNAL
+Descripción del problema:
+La Universidad Nacional tiene una oferta deportiva variada. Los estudiantes practican uno o varios deportes y pueden estar interesados en explorar nuevas disciplinas. El objetivo es registrar estudiantes con su ID, nombre, deportes que practican y deportes que les interesan. El sistema debe agrupar estudiantes que comparten al menos un deporte, permitir saber si un estudiante está directa o indirectamente conectado con alguien que practique un deporte de su interés, indicar si no hay conexión, acceder a datos de estudiantes por ID, eliminar estudiantes, y registrar cuántos estudiantes practican cada deporte, listándolos en orden.
+Reevaluación de Estructuras de Datos:
+Este problema requiere fuertemente el uso de Grafos para la funcionalidad principal de determinar conexiones directas e indirectas entre estudiantes y para agrupar comunidades deportivas. La funcionalidad de "acceder directamente a los datos completos de cualquier estudiante mediante su ID"  también se beneficia enormemente de una Tabla Hash para eficiencia. Dado que estas dos estructuras no se han visto, este proyecto es
+Veredicto:
+no recomendable para tu equipo en este momento.
+
+
+Problema 2: RESIDENCIAS UNAL
+Descripción del problema:
+La Universidad Nacional ofrece residencias universitarias con alta demanda. Se necesita un sistema para registrar estudiantes con ID, nombre completo y puntaje socioeconómico (a menor puntaje, mayor necesidad). El sistema debe permitir ingresar cupos disponibles , acceder a datos por ID , listar estudiantes por puntaje socioeconómico creciente , asignar cupos comenzando por los de menor puntaje , listar quienes obtuvieron residencia y quienes no , modificar puntaje de un estudiante y que se actualice su posición , y eliminar estudiantes del sistema.
+Estructuras de Datos Requeridas/Recomendadas:
+Min-Heap (Montículo de Mínimos): Esta es la estructura fundamental y perfecta para este problema. Permite extraer eficientemente al estudiante con el menor puntaje socioeconómico (mayor prioridad) para la asignación de cupos. La operación de modificar el puntaje de un estudiante (que implica reubicarlo en el montículo) y eliminarlo también se puede gestionar con un montículo.
+Árbol AVL o BST (Árbol de Búsqueda Binaria Balanceado): Aunque el Min-Heap maneja bien la asignación prioritaria, un AVL o BST podría ser útil para las siguientes funcionalidades:
+Acceder directamente a los datos mediante el ID único:
+Si bien un Hash Table es ideal, un BST o AVL también puede realizar búsquedas eficientes por ID si los IDs son ordenables. La búsqueda sería O(logN).
+Listar estudiantes en orden creciente por puntaje socioeconómico:
+Un recorrido in-order de un BST/AVL que mantenga a los estudiantes ordenados por puntaje socioeconómico permitiría esto.
+Modificar el puntaje de un estudiante y que el sistema actualice su posición:
+En un BST/AVL, esto implica eliminar el nodo antiguo y reinsertar el nodo con el nuevo puntaje, manteniendo el orden.
+Eliminar estudiantes del sistema:
+Un BST/AVL soporta la eliminación eficiente.
+
+Ventajas:
+Alineación con Estructuras Conocidas: Este problema se alinea perfectamente con el uso de Montículos y Árboles AVL/BST, que son estructuras que han visto.
+Eficiencia en Asignación Prioritaria: El Min-Heap asegura una asignación de cupos justa y rápida para los estudiantes más prioritarios.
+Manejo de Operaciones CRUD: Un AVL/BST puede manejar las operaciones de crear, leer (por ID), actualizar (puntaje) y eliminar estudiantes de forma eficiente.
+
+Desventajas:
+Gestión de Doble Estructura (opcional pero útil): Si se usan tanto un Heap para la prioridad como un BST/AVL para el acceso por ID, se debe mantener la coherencia entre ambas estructuras cuando se modifican o eliminan estudiantes. Esto puede añadir complejidad a la implementación. Sin embargo, se podría optar por solo un Heap y para el acceso por ID, si no es estrictamente por orden de puntaje, se podría tener un puntero directo o buscar linealmente si la cantidad de estudiantes es pequeña.
+
+
+Problema 3: GRADUACIÓN UNAL
+Descripción del problema:
+En la Universidad Nacional, los programas académicos de pregrado están conformados por múltiples asignaturas. Algunas de estas asignaturas tienen prerrequisitos. Además, los estudiantes tienen un límite máximo de materias que pueden cursar por semestre. El sistema debe permitir determinar el número mínimo de semestres necesarios para que un estudiante pueda terminar su plan de estudios, cumpliendo con todas las asignaturas obligatorias, las restricciones de prerrequisitos, y el límite máximo de asignaturas por semestre. El sistema debe registrar asignaturas con ID numérico y lista de prerrequisito , acceder a cualquier asignatura por su ID , calcular el número mínimo de semestres necesarios y mostrar qué asignaturas se deben cursar en cada semestre.
+Reevaluación de Estructuras de Datos:
+Este problema requiere esencialmente el uso de Grafos Dirigidos Acíclicos (DAGs) para modelar las dependencias de prerrequisitos entre asignaturas. El cálculo del número mínimo de semestres y la asignación de asignaturas por semestre se realizan típicamente mediante algoritmos de recorrido de grafos y ordenamiento topológico. Dado que los grafos no han sido vistos, este proyecto es
+Veredicto:
+no recomendable para tu equipo.
+
+Problema 4: RESERVAS DE ESPACIO UNAL
+Descripción del problema:
+La Universidad Nacional dispone de espacios como salones, auditorios, canchas y laboratorios que pueden ser reservados. Algunos espacios son físicamente combinables. El sistema debe permitir gestionar estos espacios, sus reservas, fusiones de espacios, y mantener un historial de uso ordenado. Debe registrar espacios con ID único, tipo de espacio y disponibilidad horaria. Permitir hacer reservas indicando espacio solicitado y horario de inicio y fin , evitando conflictos (un espacio no puede tener dos reservas en el mismo horario). Permitir fusionar espacios compatibles si están ambos disponibles. Listar los espacios ordenados por la cantidad total de reservas realizadas. Consultar la disponibilidad actual de un espacio.
+Reevaluación de Estructuras de Datos:
+Conjuntos Disjuntos (Disjoint Sets / Union-Find): Esta estructura es ideal para manejar la funcionalidad de "fusionar espacios compatibles". Permite agrupar eficientemente los espacios que se han combinado.
+Árbol AVL o BST: Se podría usar para almacenar las reservas de cada espacio. Cada nodo del árbol podría representar una reserva, y el árbol se ordenaría por la hora de inicio de la reserva. Esto facilitaría la detección de conflictos de horario  y la consulta de disponibilidad para un intervalo dado, aunque sería una implementación más compleja que un árbol de intervalos puro.
+Montículo (Heap): Para "listar los espacios ordenados por la cantidad total de reservas realizadas". Se podría usar un Max-Heap donde la prioridad sea el número de reservas.
+
+Ventajas:
+Alineación con Estructuras Conocidas: Este problema permite el uso directo de Conjuntos Disjuntos, Montículos y Árboles AVL/BST.
+Gestión de Fusiones Clara: Los Conjuntos Disjuntos son la herramienta perfecta para modelar y gestionar las fusiones de espacios.
+Ordenamiento por Reservas: El Montículo facilita la obtención de los espacios más reservados.
+
+Desventajas:
+Gestión de Conflictos Horarios: Aunque un AVL/BST puede almacenar reservas, la detección eficiente de solapamientos horarios (evitar conflictos ) es más naturalmente resuelta con estructuras más avanzadas como árboles de intervalos (que no han visto). Implementar esto con un AVL/BST requeriría una lógica de búsqueda más compleja que recorra el árbol en busca de solapamientos. Sin la ayuda de estructuras de intervalos, verificar conflictos podría ser menos eficiente.
+Conclusión y Recomendación:
+Basado en las estructuras de datos que han visto (Árboles AVL o BST, Montículos, Conjuntos Disjuntos ) y eliminando los que requieren Grafos o Hash Tables como dependencia principal:
+
+
+"RESIDENCIAS UNAL" parece ser el proyecto más adecuado y con una implementación más directa utilizando un Min-Heap para la asignación prioritaria y un AVL/BST para el acceso, modificación y eliminación por ID, así como para el listado ordenado de estudiantes. Se adapta muy bien a las estructuras que han cubierto.
+"RESERVAS DE ESPACIO UNAL" también es una opción viable, haciendo un uso fuerte de Conjuntos Disjuntos para las fusiones y Montículos para el listado ordenado por reservas. La parte más desafiante sería la gestión de conflictos horarios con AVL/BST, pero es posible con una implementación cuidadosa.
+
+Recomendaría encarecidamente "RESIDENCIAS UNAL" como la opción con la curva de aprendizaje más manejable y una aplicación muy clara de las estructuras de datos que ya han estudiado. Permite una implementación robusta y la oportunidad de demostrar un buen entendimiento de Montículos y Árboles Balanceados.
