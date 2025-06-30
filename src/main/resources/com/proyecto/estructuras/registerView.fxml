@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="540.0" prefWidth="720.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.estructuras.registerController">
+    <VBox alignment="TOP_CENTER" prefHeight="540.0" prefWidth="720.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <padding>
+            <Insets top="40.0" left="50.0" right="50.0" bottom="20.0" />
+        </padding>
+        <Label text="Registrar Nuevo Estudiante">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <Separator prefWidth="200.0" />
+        <GridPane hgap="15.0" vgap="15.0" alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" prefWidth="150.0" />
+                <ColumnConstraints hgrow="ALWAYS" prefWidth="300.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+            <Label text="ID Estudiante:" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+            <TextField fx:id="txtStudentId" promptText="Ingrese ID (solo números)" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+            <Label text="Nombre Completo:" GridPane.rowIndex="1" GridPane.columnIndex="0">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+            <TextField fx:id="txtFullName" promptText="Ingrese nombre completo" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+            <Label text="Puntaje Socioeconómico:" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+            <TextField fx:id="txtSocioeconomicScore" promptText="Ingrese puntaje (solo números)" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+        </GridPane>
+        <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#handleRegister" text="Registrar" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold;">
+            <font>
+                <Font size="12.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Button>
+        <Label fx:id="lblMessage" textFill="RED" wrapText="true">
+            <font>
+                <Font size="14.0" />
+            </font>
+            <padding>
+                <Insets top="10.0" />
+            </padding>
+        </Label>
+    </VBox>
+</AnchorPane>
