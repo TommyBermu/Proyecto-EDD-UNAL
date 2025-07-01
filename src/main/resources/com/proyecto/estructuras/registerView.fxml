@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="720.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.estructuras.registerController">
+<AnchorPane prefHeight="540.0" prefWidth="720.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.estructuras.registerController">
     <VBox alignment="TOP_CENTER" prefHeight="540.0" prefWidth="720.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
-            <Insets top="40.0" left="50.0" right="50.0" bottom="20.0" />
+            <Insets bottom="20.0" left="50.0" right="50.0" top="40.0" />
         </padding>
         <Label text="Registrar Nuevo Estudiante">
             <font>
@@ -16,36 +23,36 @@
             </font>
         </Label>
         <Separator prefWidth="200.0" />
-        <GridPane hgap="15.0" vgap="15.0" alignment="CENTER">
+        <GridPane alignment="CENTER" hgap="15.0" vgap="15.0">
             <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" prefWidth="150.0" />
-                <ColumnConstraints hgrow="ALWAYS" prefWidth="300.0" />
+                <ColumnConstraints halignment="RIGHT" maxWidth="189.59996337890624" minWidth="142.4" prefWidth="183.99998779296874" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="461.0" minWidth="414.4000366210938" prefWidth="420.0000122070313" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints />
                 <RowConstraints />
                 <RowConstraints />
             </rowConstraints>
-            <Label text="ID Estudiante:" GridPane.rowIndex="0" GridPane.columnIndex="0">
+            <Label text="ID Estudiante:" GridPane.columnIndex="0" GridPane.rowIndex="0">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Label>
-            <TextField fx:id="txtStudentId" promptText="Ingrese ID (solo números)" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-            <Label text="Nombre Completo:" GridPane.rowIndex="1" GridPane.columnIndex="0">
+            <TextField fx:id="txtStudentId" promptText="Ingrese ID (solo números)" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label text="Nombre Completo:" GridPane.columnIndex="0" GridPane.rowIndex="1">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Label>
-            <TextField fx:id="txtFullName" promptText="Ingrese nombre completo" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-            <Label text="Puntaje Socioeconómico:" GridPane.rowIndex="2" GridPane.columnIndex="0">
+            <TextField fx:id="txtFullName" promptText="Ingrese nombre completo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Puntaje Socioeconómico:" GridPane.columnIndex="0" GridPane.rowIndex="2">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Label>
-            <TextField fx:id="txtSocioeconomicScore" promptText="Ingrese puntaje (solo números)" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+            <TextField fx:id="txtSocioeconomicScore" promptText="Ingrese puntaje (solo números)" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         </GridPane>
-        <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#handleRegister" text="Registrar" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold;">
+        <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#handleRegister" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold;" text="Registrar">
             <font>
                 <Font size="12.0" />
             </font>
