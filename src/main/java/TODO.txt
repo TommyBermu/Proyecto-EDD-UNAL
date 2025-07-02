@@ -2,18 +2,23 @@ A discutir: guardar los datos en una base de datos o en un archivo JSON xd
 
 Cambiar el AVL por un Hash (para hacerlo más eficiente) e implementar las estructuras:
 
-*** NOTACIÓN: "acción desde la interfaz (estructuras afectadas)"" ***
-registar un nuevo estudiante (heap, avl)
-    (si se pasa a hash, seria solo crear un nuevo elemento en la tabla hash)
-buscar por id (avl):
-    (si se pasa a hash, seria solo buscar en la tabla hash xd)
-- modificar puntaje (heap, avl, para avl sería eliminar el nodo e insertar otro con el nuevo valor)
-    (si se pasa a hash, como ya tenemos el id, es eliminar el id en la tabla y crear uno nuevo con el nuevo valor)
-- eliminar estudiante (heap, avl)
-    (si se pasa a hash, seria solo eliminarlo de la tabla xd)
+*** NOTACIÓN: "acción desde la interfaz (estructuras afectadas) [complejidad total]" ***
+
+registar un nuevo estudiante (heap, avl) [O(log n), por ambas estructuras]
+    (si se pasa a hash, seria solo crear un nuevo elemento en la tabla hash) [O(log n), por el heap]
+
+buscar por id (avl) [O(log n)]:
+    (si se pasa a hash, seria solo buscar en la tabla hash xd) [O(1)]
+- modificar puntaje (heap, avl, para avl sería eliminar el nodo e insertar otro con el nuevo valor) [O(n) ,porque el heap tiene que buscar hasta encontrar el id]
+    (si se pasa a hash, como ya tenemos el id, es eliminar el id en la tabla y crear uno nuevo con el nuevo valor) [==]
+- eliminar estudiante (heap, avl) [O(n)]
+    (si se pasa a hash, seria solo eliminarlo de la tabla xd) [==]
+
 actualizar cupos (ninguna estructura, solo otro dato en el JSON)
-ejecutar asignación de cupos (heap, avl)
-    (si se pasa a hash, se tendría que conseguir el id del estudiante al que se le acaba de asignar el cupo y cambiarlo en la tabla hash)
-listar todos los estudiantes (heapSort)
-estudiantes con residencia (heapSort, solo asignados, se puede con streams)
-estudiantes sin residencia (heapSort, solo no asignados, se puede con streams)
+
+ejecutar asignación de cupos (heap, avl) [O(m * log n), porque el heap tiene que reacomodar m veces]
+    (si se pasa a hash, se tendría que conseguir el id del estudiante al que se le acaba de asignar el cupo y cambiarlo en la tabla hash) [==]
+
+listar todos los estudiantes (heapSort) [O(n * log n), porque esa es la complejidad del heapsort xd]
+estudiantes con residencia (heapSort, solo asignados, se puede con streams) [==]
+estudiantes sin residencia (heapSort, solo no asignados, se puede con streams) [==]
