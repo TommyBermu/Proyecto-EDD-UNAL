@@ -1,21 +1,19 @@
-Descripción del problema:
-La Universidad Nacional ofrece residencias universitarias con alta demanda. Se necesita un sistema para registrar estudiantes con ID, nombre completo y puntaje socioeconómico (a menor puntaje, mayor necesidad). El sistema debe permitir ingresar cupos disponibles , acceder a datos por ID , listar estudiantes por puntaje socioeconómico creciente , asignar cupos comenzando por los de menor puntaje , listar quienes obtuvieron residencia y quienes no , modificar puntaje de un estudiante y que se actualice su posición , y eliminar estudiantes del sistema.
-Estructuras de Datos Requeridas/Recomendadas:
-Min-Heap (Montículo de Mínimos): Esta es la estructura fundamental y perfecta para este problema. Permite extraer eficientemente al estudiante con el menor puntaje socioeconómico (mayor prioridad) para la asignación de cupos. La operación de modificar el puntaje de un estudiante (que implica reubicarlo en el montículo) y eliminarlo también se puede gestionar con un montículo.
-Árbol AVL o BST (Árbol de Búsqueda Binaria Balanceado): Aunque el Min-Heap maneja bien la asignación prioritaria, un AVL o BST podría ser útil para las siguientes funcionalidades:
-Acceder directamente a los datos mediante el ID único:
-Si bien un Hash Table es ideal, un BST o AVL también puede realizar búsquedas eficientes por ID si los IDs son ordenables. La búsqueda sería O(logN).
-Listar estudiantes en orden creciente por puntaje socioeconómico:
-Un recorrido in-order de un BST/AVL que mantenga a los estudiantes ordenados por puntaje socioeconómico permitiría esto.
-Modificar el puntaje de un estudiante y que el sistema actualice su posición:
-En un BST/AVL, esto implica eliminar el nodo antiguo y reinsertar el nodo con el nuevo puntaje, manteniendo el orden.
-Eliminar estudiantes del sistema:
-Un BST/AVL soporta la eliminación eficiente.
+A discutir: guardar los datos en una base de datos o en un archivo JSON xd
 
-Ventajas:
-Alineación con Estructuras Conocidas: Este problema se alinea perfectamente con el uso de Montículos y Árboles AVL/BST, que son estructuras que han visto.
-Eficiencia en Asignación Prioritaria: El Min-Heap asegura una asignación de cupos justa y rápida para los estudiantes más prioritarios.
-Manejo de Operaciones CRUD: Un AVL/BST puede manejar las operaciones de crear, leer (por ID), actualizar (puntaje) y eliminar estudiantes de forma eficiente.
+Cambiar el AVL por un Hash (para hacerlo más eficiente) e implementar las estructuras:
 
-Desventajas:
-Gestión de Doble Estructura (opcional pero útil): Si se usan tanto un Heap para la prioridad como un BST/AVL para el acceso por ID, se debe mantener la coherencia entre ambas estructuras cuando se modifican o eliminan estudiantes. Esto puede añadir complejidad a la implementación. Sin embargo, se podría optar por solo un Heap y para el acceso por ID, si no es estrictamente por orden de puntaje, se podría tener un puntero directo o buscar linealmente si la cantidad de estudiantes es pequeña.
+*** NOTACIÓN: "acción desde la interfaz (estructuras afectadas)"" ***
+registar un nuevo estudiante (heap, avl)
+    (si se pasa a hash, seria solo crear un nuevo elemento en la tabla hash)
+buscar por id (avl):
+    (si se pasa a hash, seria solo buscar en la tabla hash xd)
+- modificar puntaje (heap, avl, para avl sería eliminar el nodo e insertar otro con el nuevo valor)
+    (si se pasa a hash, como ya tenemos el id, es eliminar el id en la tabla y crear uno nuevo con el nuevo valor)
+- eliminar estudiante (heap, avl)
+    (si se pasa a hash, seria solo eliminarlo de la tabla xd)
+actualizar cupos (ninguna estructura, solo otro dato en el JSON)
+ejecutar asignación de cupos (heap, avl)
+    (si se pasa a hash, se tendría que conseguir el id del estudiante al que se le acaba de asignar el cupo y cambiarlo en la tabla hash)
+listar todos los estudiantes (heapSort)
+estudiantes con residencia (heapSort, solo asignados, se puede con streams)
+estudiantes sin residencia (heapSort, solo no asignados, se puede con streams)
