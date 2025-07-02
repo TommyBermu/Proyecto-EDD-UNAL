@@ -52,6 +52,8 @@ public class assignController {
 
     @FXML
     public void initialize() {
+        txtAvailableSlots.setText(String.valueOf(availableSlots));
+
         colAssignedId.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()));
         colAssignedName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         colAssignedScore.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPuntaje()));

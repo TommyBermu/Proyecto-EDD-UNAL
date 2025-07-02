@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="540.0" prefWidth="720.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.estructuras.assignController">
+<AnchorPane prefHeight="540.0" prefWidth="720.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.estructuras.assignController">
     <VBox alignment="TOP_CENTER" prefHeight="540.0" prefWidth="720.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <padding>
-            <Insets top="40.0" left="20.0" right="20.0" bottom="20.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="40.0" />
         </padding>
         <Label text="Asignación de Cupos de Residencia">
             <font>
@@ -23,9 +31,9 @@
                     <Font size="14.0" />
                 </font>
             </Label>
-            <TextField fx:id="txtAvailableSlots" promptText="Número de cupos" prefWidth="100.0" />
-            <Button fx:id="btnUpdateSlots" mnemonicParsing="false" onAction="#handleUpdateSlots" text="Actualizar Cupos" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-font-weight: bold;"/>
-            <Button fx:id="btnExecuteAssignment" mnemonicParsing="false" onAction="#handleExecuteAssignment" text="Ejecutar Asignación de Cupos" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            <TextField fx:id="txtAvailableSlots" prefHeight="25.0" prefWidth="131.0" promptText="Número de cupos" />
+            <Button fx:id="btnUpdateSlots" mnemonicParsing="false" onAction="#handleUpdateSlots" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-font-weight: bold;" text="Actualizar Cupos" />
+            <Button fx:id="btnExecuteAssignment" mnemonicParsing="false" onAction="#handleExecuteAssignment" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold;" text="Ejecutar Asignación de Cupos" />
         </HBox>
 
         <Label fx:id="lblAssignmentSummary" textFill="#343a40" wrapText="true">
@@ -39,36 +47,36 @@
 
         <SplitPane dividerPositions="0.5" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
             <VBox alignment="TOP_CENTER" spacing="10.0">
-                <Label text="Estudiantes con Residencia Asignada" style="-fx-font-weight: bold;">
+                <Label style="-fx-font-weight: bold;" text="Estudiantes con Residencia Asignada">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
                 <TableView fx:id="tblAssignedStudents" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colAssignedId" text="ID" prefWidth="70.0"/>
-                        <TableColumn fx:id="colAssignedName" text="Nombre" prefWidth="150.0"/>
-                        <TableColumn fx:id="colAssignedScore" text="Puntaje"/>
+                        <TableColumn fx:id="colAssignedId" prefWidth="70.0" text="ID" />
+                        <TableColumn fx:id="colAssignedName" prefWidth="150.0" text="Nombre" />
+                        <TableColumn fx:id="colAssignedScore" text="Puntaje" />
                     </columns>
                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
             </VBox>
             <VBox alignment="TOP_CENTER" spacing="10.0">
-                <Label text="Estudiantes sin Residencia Asignada" style="-fx-font-weight: bold;">
+                <Label style="-fx-font-weight: bold;" text="Estudiantes sin Residencia Asignada">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="16.0" />
                     </font>
                 </Label>
                 <TableView fx:id="tblUnassignedStudents" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="colUnassignedId" text="ID" prefWidth="70.0"/>
-                        <TableColumn fx:id="colUnassignedName" text="Nombre" prefWidth="150.0"/>
-                        <TableColumn fx:id="colUnassignedScore" text="Puntaje"/>
+                        <TableColumn fx:id="colUnassignedId" prefWidth="70.0" text="ID" />
+                        <TableColumn fx:id="colUnassignedName" prefWidth="150.0" text="Nombre" />
+                        <TableColumn fx:id="colUnassignedScore" text="Puntaje" />
                     </columns>
                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
             </VBox>
