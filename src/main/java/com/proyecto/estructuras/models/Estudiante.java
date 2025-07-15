@@ -1,7 +1,7 @@
 package com.proyecto.estructuras.models;
 
 public class Estudiante {
-    private int id;
+    private int id; // la cedula xd
     private String nombre;
     private int puntaje;
     private boolean residencia;
