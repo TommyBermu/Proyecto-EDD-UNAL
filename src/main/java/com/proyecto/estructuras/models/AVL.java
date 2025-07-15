@@ -1,29 +1,54 @@
 package com.proyecto.estructuras.models;
 
-class Node {
-    int key;
-    Node left;
-    Node right;
-    int height;
-    public Node (int k){
-        this.key = k;
-        left = null;
-        right = null;
-        height = 1;
-    }
-}
+import java.util.ArrayList;
+import java.util.List;
 
-class AVL {
-    public static int height(Node N){
-        if (N == null){
-            return 0;
+class AVL<T extends Comparable<T>> {
+
+    static class Node<T> {
+        T key;
+        Node<T> left;
+        Node<T> right;
+        int height;
+        public Node (T k){
+            this.key = k;
+            left = null;
+            right = null;
+            height = 1;
         }
-        return N.height;
     }
 
-    public static Node rightRotate(Node y){
-        Node x = y.left;
-        Node B = x.right;
+    // Atributo raíz del árbol
+    private Node<T> root;
+
+    // Insertar un valor en el árbol
+    public void insert(T key) {
+        root = insertRecursivo(root, key);
+    }
+
+    // Eliminar un valor del árbol
+    public void delete(T key) {
+        root = deleteRecursivo(root, key);
+    }
+
+    //Retorna una lista ordenada de los valores
+    public List<T> getInOrder(){
+        List<T> listA = new ArrayList<>();
+        inOrder(root, listA);
+        return listA;
+    }
+
+    //-------- METODOS PRIVADOS -----------
+
+    //Retorna la altura de un nodo
+    private int height(Node<T> N){
+        return N == null ? 0 : N.height;
+    }
+
+    //Realiza la rotación a la derecha y retorna el nodo raiz de la rotación
+    private Node<T> rightRotate(Node<T> y){
+        Node<T> x = y.left;
+        Node<T> B = x.right;
         x.right = y;
         y.left = B;
 
@@ -33,9 +58,10 @@ class AVL {
         return x;
     }
 
-    public static Node leftRotate(Node x){ //x
-        Node y = x.right;
-        Node B = y.left;
+    //Realiza la rotación a la izquierda y retorna el nodo raiz de la rotación
+    private Node<T> leftRotate(Node<T> x){ //x
+        Node<T> y = x.right;
+        Node<T> B = y.left;
         y.left = x;
         x.right = B;
 
@@ -45,39 +71,34 @@ class AVL {
         return y;
     }
 
-    public static int getBalance(Node N){
-        if (N == null){
-            return 0;
-        }
-        return height(N.left) - height(N.right);
+    //Retorna el factor de balance de un nodo
+    private int getBalance(Node<T> N){
+        return N == null ? 0 : height(N.left) - height(N.right);
     }
 
-    public static Node insert(Node node, int key) {
+    private Node<T> insertRecursivo(Node<T> node, T key) {
 
         // Perform the normal BST insertion
         if (node == null)
-            return new Node(key);
+            return new Node<>(key);
 
-        if (key < node.key)
-            node.left = insert(node.left, key);
-        else if (key > node.key)
-            node.right = insert(node.right, key);
-        else // Equal keys are not allowed in BST
-            return node;
+        if (key.compareTo(node.key) < 0) //key < node.key
+            node.left = insertRecursivo(node.left, key);
+        else // key >= node.key -- incluye valores repetidos
+            node.right = insertRecursivo(node.right, key);
 
         // Update height of this ancestor node
         node.height = 1 + Math.max(height(node.left), height(node.right));
 
         // Get the balance factor of this ancestor node
         int balance = getBalance(node);
-        node = performRotations(balance, node);
-        // Return the (unchanged) node pointer, es la misma recursión del BST
-        return node;
+        // Return the (unchanged) node pointer, es la misma recursión del BST, retorna la raiz del arbol con las rotaciones realizadas
+        return performRotations(balance, node);
     }
 
-
-    public static Node minValueNode(Node nodo){
-        Node actual = nodo;
+    //Encuentra el nodo que se encuentra más a la izquierda
+    private Node<T> minValueNode(Node<T> nodo){
+        Node<T> actual = nodo;
         while (actual.left != null) {
             actual = actual.left;
         }
@@ -87,19 +108,19 @@ class AVL {
     // Recursive function to delete a node with
     // given key from subtree with given root.
     // It returns root of the modified subtree.
-    public static Node delete(Node root, int key) {
+    private Node<T> deleteRecursivo(Node<T> root, T key) {
         // STEP 1: PERFORM STANDARD BST DELETE
         if (root == null)
             return root;
 
-        if (key < root.key)
-            root.left = delete(root.left, key);
-        else if (key > root.key)
-            root.right = delete(root.right, key);
+        if (key.compareTo(root.key) < 0) // key < root.key
+            root.left = deleteRecursivo(root.left, key);
+        else if (key.compareTo(root.key) > 0) // key > root.key
+            root.right = deleteRecursivo(root.right, key);
         else {
             // Case 0 and 1
             if ((root.left == null) || (root.right == null)) {
-                Node temp = root.left != null ? root.left : root.right;
+                Node<T> temp = root.left != null ? root.left : root.right;
 
                 // No child case
                 if (temp == null) {
@@ -108,9 +129,9 @@ class AVL {
                 } else // One child case
                     root = temp; // Copy the contents of the non-empty child
             } else {
-                Node temp = minValueNode(root.right);
+                Node<T> temp = minValueNode(root.right);
                 root.key = temp.key;
-                root.right = delete(root.right, temp.key);
+                root.right = deleteRecursivo(root.right, temp.key);
             }
         }
 
@@ -123,11 +144,11 @@ class AVL {
 
         int balance = getBalance(root);
         // If this node becomes unbalanced, then there are 4 cases
-        root = performRotations(balance, root);
-        return root;
+        return performRotations(balance, root);
     }
 
-    public static Node performRotations(int balance, Node root){
+    //Evalua cual de los 4 casos de rotación hay que realizar
+    private Node<T> performRotations(int balance, Node<T> root){
         // Left Left Case
         if (balance > 1 && getBalance(root.left) >= 0){
             return rightRotate(root);
@@ -141,7 +162,6 @@ class AVL {
         else if (balance < -1 && getBalance(root.right) <= 0)
             return leftRotate(root);
             // Right Left Case
-            // (balance < -1 && getBalance(root.right) > 0)
         else if (balance < -1 && getBalance(root.right) > 0){
             root.right = rightRotate(root.right);
             return leftRotate(root);
@@ -149,11 +169,12 @@ class AVL {
         return root;
     }
 
-    public static void preOrder(Node root) {
+    //Recorre el arbol de menor a mayor de forma recursiva y añade el valor de cada nodo en una lista
+    private void inOrder(Node<T> root, List<T> lista) {
         if (root != null) {
-            System.out.print(root.key + " ");
-            preOrder(root.left);
-            preOrder(root.right);
+            inOrder(root.left,  lista);
+            lista.add(root.key);
+            inOrder(root.right, lista);
         }
     }
 
