@@ -178,6 +178,40 @@ class AVL<T extends Comparable<T>> {
         }
     }
 
+    public void printTree() {
+        System.out.println("\n=== Horizontal tree ===\n");
+        if (root == null) {
+            System.out.println("(vacío)");
+            return;
+        }
+        printTreeRec(root, "", true, false);
+    }
 
+    /**
+     * The recursive method to print the tree
+     */
+    private void printTreeRec(Node<T> node, String prefix, boolean isRoot, boolean isLeft) {
+        if (node == null) return;
 
+        // Primero procesamos el hijo derecho (va hacia arriba)
+        if (node.right != null) {
+            printTreeRec(node.right,
+                    prefix + (isRoot ? "" : (isLeft ? "│   " : "    ")),
+                    false, false);
+        }
+
+        // Luego imprimimos el nodo actual
+        if (isRoot) {
+            System.out.println(prefix + node);
+        } else {
+            System.out.println(prefix + (isLeft ? "└── " : "┌── ") + node);
+        }
+
+        // Finalmente procesamos el hijo izquierdo (va hacia abajo)
+        if (node.left != null) {
+            printTreeRec(node.left,
+                    prefix + (isRoot ? "" : (isLeft ? "    " : "│   ")),
+                    false, true);
+        }
+    }
 }
