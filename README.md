@@ -1,2 +1,3 @@
 TENEMOS 1 GRAN PROBLEMA: 
 1) Si organizamos el AVL por puntaje y hay puntajes repetidos, entonces para elimiinar por ID debemos buscar en O(m) donde, m es la cantidad de nodos que comparten el mismo puntaje.
+2) Se puede implementar esta solución: Como pueden haber muchos estudiantes con el mismo PBM en el avl, podemos dejar el valor de los nodos del avl, como unicos, es decir sin repeticiones, y en cada nodo hacer un arreglo de estudiantes que tengan el mismo PBM. Esto para poder hacer un HashMap con estos elementos de PBM repetido y buscar por ID del estudiante en esta estructura de Hash. De esta manera el Hashmap sería O(1) y el avl O(log n) resultando en O(log n) para la eliminación de un estudiante.
