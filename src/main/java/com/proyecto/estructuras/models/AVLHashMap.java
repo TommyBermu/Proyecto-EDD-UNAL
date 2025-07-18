@@ -448,31 +448,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
     }
 
     /**
-     * Find the next node (in value) in the BST
-     *
-     * @param node node to find the next node
-     * @return next node
-     */
-    public Node<K, V> next(Node<K, V> node) {
-        if (node == null)
-            return null;
-
-        return node.right != null ? findMin(node.right) : findAncestor(node);
-    }
-
-    /**
-     * return the first parent node with a value greater than the given node's value
-     *
-     * @param node node to find ancestor
-     * @return ancestor node
-     */
-    public Node<K, V> findAncestor(Node<K, V> node) {
-        if (node.parent != null && node.data.compareTo(node.parent.data) > 0)
-            return findAncestor(node.parent);
-        return node.parent;
-    }
-
-    /**
      * find the minimum node in the tree rooted at the given node
      * 
      * @param node node to find minimum

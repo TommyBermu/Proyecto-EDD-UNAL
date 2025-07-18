@@ -13,8 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import java.util.ArrayList;
-import java.util.List;
 
 public class assignController {
 
@@ -44,8 +42,8 @@ public class assignController {
     private TableColumn<Estudiante, Number> colUnassignedScore;
 
     private ObservableList<Estudiante> allStudents = FXCollections.observableArrayList();
-    private ObservableList<Estudiante> assignedStudents = FXCollections.observableArrayList();
-    private ObservableList<Estudiante> unassignedStudents = FXCollections.observableArrayList();
+    private final ObservableList<Estudiante> assignedStudents = FXCollections.observableArrayList();
+    private final ObservableList<Estudiante> unassignedStudents = FXCollections.observableArrayList();
 
     private final StudentDataManager dataManager = StudentDataManager.getInstance();
 
