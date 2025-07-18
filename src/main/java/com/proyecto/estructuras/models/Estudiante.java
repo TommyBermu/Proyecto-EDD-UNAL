@@ -1,10 +1,12 @@
 package com.proyecto.estructuras.models;
 
-public class Estudiante {
+public class Estudiante implements Comparable<Estudiante>{
     private int id; // la cedula xd
     private String nombre;
-    private int puntaje;
+    private Integer puntaje;
     private boolean residencia;
+
+    public Estudiante(){}
 
     public Estudiante(int id, String nombre, int puntaje, boolean residencia) {
         this.id = id;
@@ -17,8 +19,16 @@ public class Estudiante {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getPuntaje() {
@@ -29,11 +39,16 @@ public class Estudiante {
         this.puntaje = puntaje;
     }
 
-    public boolean getEstado() {
+    public boolean getResidencia() {
         return residencia;
     }
 
-    public void setEstado(boolean residencia) {
+    public void setResidencia(boolean residencia) {
         this.residencia = residencia;
+    }
+
+    @Override
+    public int compareTo(Estudiante o) {
+        return this.puntaje.compareTo(o.getPuntaje());
     }
 }

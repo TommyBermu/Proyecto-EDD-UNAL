@@ -1,0 +1,19 @@
+{
+  "estudiantes" : [ {
+    "id" : 1011090803,
+    "nombre" : "Tomas Bermudez",
+    "puntaje" : 1,
+    "residencia" : true
+  }, {
+    "id" : 52494204,
+    "nombre" : "Deisy Guaqueta",
+    "puntaje" : 12,
+    "residencia" : true
+  }, {
+    "id" : 79706714,
+    "nombre" : "Jair Bermudez",
+    "puntaje" : 56,
+    "residencia" : false
+  } ],
+  "cuposDisponibles" : 2
+}

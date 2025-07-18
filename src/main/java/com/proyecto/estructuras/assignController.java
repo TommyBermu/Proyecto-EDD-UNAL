@@ -1,6 +1,7 @@
 package com.proyecto.estructuras;
 
 import com.proyecto.estructuras.models.Estudiante;
+import com.proyecto.estructuras.models.StudentDataManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,9 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class assignController {
@@ -22,9 +21,9 @@ public class assignController {
     @FXML
     private TextField txtAvailableSlots;
     @FXML
-    private Button btnUpdateSlots;
+    public Button btnUpdateSlots;
     @FXML
-    private Button btnExecuteAssignment;
+    public Button btnExecuteAssignment;
     @FXML
     private Label lblAssignmentSummary;
     @FXML
@@ -48,7 +47,9 @@ public class assignController {
     private ObservableList<Estudiante> assignedStudents = FXCollections.observableArrayList();
     private ObservableList<Estudiante> unassignedStudents = FXCollections.observableArrayList();
 
-    private int availableSlots = 0; // Número de cupos disponibles
+    private final StudentDataManager dataManager = StudentDataManager.getInstance();
+
+    private int availableSlots = dataManager.getCuposDisponibles();
 
     @FXML
     public void initialize() {
@@ -62,12 +63,15 @@ public class assignController {
         colUnassignedName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         colUnassignedScore.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPuntaje()));
 
+        allStudents = FXCollections.observableArrayList(dataManager.getAllEstudiantes());
+        for (Estudiante student : allStudents)
+            if (student.getResidencia())
+                assignedStudents.add(student);
+            else
+                unassignedStudents.add(student);
+
         tblAssignedStudents.setItems(assignedStudents);
         tblUnassignedStudents.setItems(unassignedStudents);
-
-        // TODO Cargar datos de prueba o estado inicial (hacerlo desde un json o base de datos)
-        loadInitialDataMock();
-        updateTables();
     }
 
     @FXML
@@ -85,7 +89,7 @@ public class assignController {
                 lblAssignmentSummary.setStyle("-fx-text-fill: red;");
                 return;
             }
-            availableSlots = slots;
+            dataManager.setCuposDisponibles(availableSlots = slots);
             lblAssignmentSummary.setText("Cupos disponibles actualizados a: " + availableSlots);
             lblAssignmentSummary.setStyle("-fx-text-fill: green;");
         } catch (NumberFormatException e) {
@@ -108,30 +112,17 @@ public class assignController {
             return;
         }
 
-        // TODO **Tu lógica de asignación aquí**
-        // 1. Obtener la lista de estudiantes de tu estructura de datos (ej. Min-Heap)
-        // 2. Ordenarlos por puntaje socioeconómico (menor puntaje = mayor prioridad)
-        // 3. Asignar cupos a los primeros 'availableSlots' estudiantes
-        // 4. Actualizar el estado de residencia de cada estudiante
-
-        // Simulación de la lógica de asignación:
-        // Primero, limpia las listas de asignados y no asignados
         assignedStudents.clear();
         unassignedStudents.clear();
 
-        List<Estudiante> studentsForAssignment = new ArrayList<>(allStudents);
-
-        // TODO Ordenar estudiantes por puntaje socioeconómico de forma creciente (menor puntaje = mayor necesidad) hacerlo con heapSort con el minHeap
-        studentsForAssignment.sort(Comparator.comparingDouble(Estudiante::getPuntaje));
-
         int assignedCount = 0;
-        for (Estudiante student : studentsForAssignment) {
+        for (Estudiante student : allStudents) {
             if (assignedCount < availableSlots) {
-                student.setEstado(true);
+                dataManager.assignEstudiante(student.getId(), true);
                 assignedStudents.add(student);
                 assignedCount++;
             } else {
-                student.setEstado(false);
+                dataManager.assignEstudiante(student.getId(), false);
                 unassignedStudents.add(student);
             }
         }
@@ -139,30 +130,6 @@ public class assignController {
         lblAssignmentSummary.setText("Asignación completada. Se asignaron " + assignedCount + " de " + availableSlots + " cupos.");
         lblAssignmentSummary.setStyle("-fx-text-fill: green;");
 
-        tblAssignedStudents.setItems(assignedStudents);
-        tblUnassignedStudents.setItems(unassignedStudents);
-    }
-
-    // TODO --- Mock Data (Reemplaza con la carga real de tus estudiantes) ---
-    private void loadInitialDataMock() {
-        allStudents.add(new Estudiante(101, "Ana García", 30, false));
-        allStudents.add(new Estudiante(102, "Luis Martínez", 25, false));
-        allStudents.add(new Estudiante(103, "Sofía Ramírez", 40, false));
-        allStudents.add(new Estudiante(104, "Pedro Gómez", 20, false));
-        allStudents.add(new Estudiante(105, "Laura Fernández", 35, false));
-    }
-
-    // TODO para actualizar las tablas (util si la lista allStudents cambia)
-    private void updateTables() {
-        assignedStudents.clear();
-        unassignedStudents.clear();
-        for (Estudiante student : allStudents) {
-            if (student.getEstado()) {
-                assignedStudents.add(student);
-            } else {
-                unassignedStudents.add(student);
-            }
-        }
         tblAssignedStudents.setItems(assignedStudents);
         tblUnassignedStudents.setItems(unassignedStudents);
     }
