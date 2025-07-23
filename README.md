@@ -16,11 +16,14 @@ Este sistema ayuda a la Universidad Nacional de Colombia (UNAL) a asignar cupos 
 
 El sistema utiliza una implementación manual de una estructura mixta (AVL + HashMap) bautizada como AVLHashMap para manejar eficientemente los datos de los estudiantes. El ID del estudiante actúa como la clave, permitiendo búsquedas rápidas y el estudiante es el valor, este mismo es usado para organizar el AVL, organizándose por medio del puntaje asociado, manteniendo la información organizada.
 
-## Tecnologías Utilizadas
+## Entorno de Desarrollo y Operación
 
-* **Java 21**: Lenguaje de programación.
-* **JavaFX**: Interfaz gráfica de usuario (UI).
-* **Jackson**: Serialización y deserialización de datos a JSON.
+* **Lenguaje de programación**: Java 21
+* **Control de versiones**: GitHub
+* **Entorno de desarrollo**: IntelliJ IDEA Ultimate
+* **Interfaz gráfica de usuario (UI)**: JavaFX
+* **Gestión de dependencias**: Maven / Gradle
+* **Serialización JSON**: Jackson
 
 ## Cómo Ejecutar el Proyecto
 
@@ -43,14 +46,6 @@ El sistema utiliza una implementación manual de una estructura mixta (AVL + Has
 * **`StudentDataManager`**: Gestiona a los estudiantes registrados y la lógica de asignación de cupos. Utiliza un patrón Singleton.
 * **Controladores**: `assignController`, `consultController`, `listingController`, `mainController`, `registerController`. Gestionan la interacción entre el usuario y la lógica del sistema.
 
-## Entorno de Desarrollo y Operación
-
-* **Lenguaje de programación**: Java 21
-* **Control de versiones**: GitHub
-* **Entorno de desarrollo**: IntelliJ IDEA Ultimate
-* **Interfaz gráfica de usuario (UI)**: JavaFX
-* **Gestión de dependencias**: Maven / Gradle
-* **Serialización JSON**: Jackson
 
 ## Análisis de Rendimiento y Complejidad
 
