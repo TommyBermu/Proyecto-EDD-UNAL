@@ -12,10 +12,10 @@ public class AVLHashMap<K, V extends Comparable<V>> {
         // para el hashmap
         protected K key;
         protected Node<K, V> next;
-
+        
         /**
          * Node constructor
-         *
+         * 
          * @param key key to store in the node
          * @param data data to store in the node
          * @param parent parent of the node
@@ -61,7 +61,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Retrieves the value associated with the specified key.
-     *
      * @param key the key whose associated value is to be returned
      * @return the value associated with the key, or null if the key does not exist
      */
@@ -72,7 +71,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Retrieves the node associated with the specified key.
-     *
      * @param key the key whose associated value is to be returned
      * @return the node associated with the key, or null if the key does not exist
      */
@@ -90,7 +88,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Inserts a key-value pair into the structure.
-     *
      * @param key the key to insert
      * @param value the value to insert
      * @return true if the insertion was successful, false if the key already exists
@@ -112,32 +109,26 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Insert a new node into the tree
-     *
      * @param node node to which we want to make a child
      * @param data data to create the child
      * @return updated node
      */
     protected Node<K, V> insertRec(Node<K, V> node, V data, Node<K, V> parent, K key) {
         if (node == null)
-            return rebalance(buckets[hash(key.hashCode())] =
-                    new Node<>(key, data, parent, buckets[hash(key.hashCode())]), data, true);
+            return rebalance(buckets[hash(key.hashCode())] = 
+            new Node<>(key, data, parent, buckets[hash(key.hashCode())]), data, true);
 
         if (node.data.compareTo(data) > 0)
             node.left = insertRec(node.left, data, node, key);
-
-        else if (node.data.compareTo(data) < 0)
+        //Se incluye los estudiantes con PBM repetido
+        else
             node.right = insertRec(node.right, data, node, key);
-
-        else {
-            System.out.println("El valor " + data + " ya existe en el árbol");
-            return node;
-        }
         return rebalance(node, data, true);
     }
-
+    
     /**
      * Removes a key from the structure, both from the hash map and the AVL tree.
-     *
+     * 
      * @param key key to remove
      */
     public void remove(K key) {
@@ -155,7 +146,7 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Removes a key from the hash map
-     *
+     * 
      * @param key the key to remove
      */
     private void removeFromHashMap(K key) {
@@ -179,7 +170,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Removes a node from the AVL tree.
-     *
      * @param nodeToRemove the node to remove
      */
     private void removeFromAVL(Node<K, V> nodeToRemove) {
@@ -198,11 +188,11 @@ public class AVLHashMap<K, V extends Comparable<V>> {
                 rebalanceUp(parent, nodeToRemove.data);
             }
         }
-
+        
         // Caso 2: Solo hijo derecho
         else if (nodeToRemove.left == null) {
             nodeToRemove.right.parent = nodeToRemove.parent;
-
+            
             if (nodeToRemove.parent == null) {
                 root = nodeToRemove.right;
             } else {
@@ -215,11 +205,11 @@ public class AVLHashMap<K, V extends Comparable<V>> {
                 rebalanceUp(nodeToRemove.parent, nodeToRemove.data);
             }
         }
-
+        
         // Caso 3: Solo hijo izquierdo
         else if (nodeToRemove.right == null) {
             nodeToRemove.left.parent = nodeToRemove.parent;
-
+            
             if (nodeToRemove.parent == null) {
                 root = nodeToRemove.left;
             } else {
@@ -243,14 +233,12 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Rebalance the tree upwards after a removal.
-     *
      * @param node the node to start rebalancing from
      * @param removedData the data that was removed, used to determine the rotation direction
      */
     private void rebalanceUp(Node<K, V> node, V removedData) {
         while (node != null) {
             Node<K, V> newRoot = rebalance(node, removedData, false);
-
             // Si el nodo cambió después del rebalance, actualizar las referencias del padre
             if (newRoot != node) {
                 if (newRoot.parent == null) {
@@ -271,7 +259,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Hashes an integer key
-     *
      * @param x the key to hash
      * @return the hashed key
      */
@@ -289,19 +276,18 @@ public class AVLHashMap<K, V extends Comparable<V>> {
     private void resize(){
         Node<K, V>[] oldBuckets = buckets;
         int oldCapacity = capacity;
-
         this.capacity = oldCapacity * 2;
         buckets = new Node[capacity];
 
         size = 0;
-
+        
         // Rehash todos los elementos existentes
         for (int i = 0; i < oldCapacity; i++) {
             Node<K, V> curr = oldBuckets[i];
-
+            
             while (curr != null) {
                 Node<K, V> next = curr.next;
-
+                
                 int newIdx = hash(curr.key.hashCode());
                 curr.next = buckets[newIdx];
                 buckets[newIdx] = curr;
@@ -314,7 +300,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Replaces the value for the given key.
-     *
      * @param key the key to replace
      * @param value the new value
      * @return the old value, or null if the key was not found
@@ -324,9 +309,9 @@ public class AVLHashMap<K, V extends Comparable<V>> {
         if (node == null) {
             return null;
         }
-
+        
         V oldValue = node.data;
-
+        
         if (!oldValue.equals(value)) {
             remove(key);
             insert(key, value);
@@ -337,7 +322,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Checks if the map contains the given key.
-     *
      * @param key the key to check
      * @return true if the key is found, false otherwise
      */
@@ -347,7 +331,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Returns the size of the hash map.
-     *
      * @return the number of key-value pairs in the map
      */
     public int size() {
@@ -365,7 +348,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Calculates the height of the given node.
-     *
      * @param node the node to check
      * @return the height of the node
      */
@@ -449,7 +431,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * find the minimum node in the tree rooted at the given node
-     *
      * @param node node to find minimum
      * @return minimum node
      */
@@ -461,7 +442,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Get the height of a node
-     *
      * @param node node to get height
      * @return height of the node
      */
@@ -471,7 +451,6 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
     /**
      * Update the height of a node
-     *
      * @param node node to update height
      */
     public void updateHeight(Node<K, V> node) {
