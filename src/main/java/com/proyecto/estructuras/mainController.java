@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class mainController {
@@ -55,7 +56,7 @@ public class mainController {
             Parent assignView = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/proyecto/estructuras/assignView.fxml")));
             contentPane.getChildren().setAll(assignView); // Carga la vista de asignación en el contentPane
         } catch (IOException e) {
-            System.err.println("Error al cargar la vista de asignación: " + e.getMessage());
+            System.err.println("Error al cargar la vista de asignación: " + Arrays.toString(e.getStackTrace()));
         }
     }
 
