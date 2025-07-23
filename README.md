@@ -29,38 +29,6 @@ El sistema utiliza una implementación manual de una estructura mixta (AVL + Has
 3.  **Configurar `module-info.java`**: Verifica que los paquetes `com.proyecto.estructuras.model` y `com.proyecto.estructuras.data` estén `opens` a `com.fasterxml.jackson.databind`.
 4.  **Compilar y Ejecutar**: Desde tu IDE o usando `mvn clean javafx:run` (Maven) / `gradlew run` (Gradle).
 
-# Asignación de Residencias Universitarias de la Universidad Nacional
-
-## Descripción del Proyecto
-
-Este proyecto aborda la problemática de la asignación eficiente, justa y priorizada de residencias universitarias en la Universidad Nacional de Colombia. Dada la alta demanda, el sistema busca garantizar una distribución equitativa de cupos, priorizando a los estudiantes con menor puntaje socioeconómico (PBM), lo que indica una mayor necesidad de alojamiento. 
-
-La solución permite registrar, consultar y modificar la información de los estudiantes solicitantes, asegurando un proceso transparente y eficiente.
-
-## MVP Implementado
-
-El sistema implementa una solución que organiza a los estudiantes por su puntaje socioeconómico, donde un puntaje más bajo significa mayor prioridad. Para ello, se utiliza una estructura híbrida llamada `AVLHashMap`, que combina las ventajas de las tablas hash y los árboles AVL.
-
-### Funcionalidades Principales
-
-* **Registrar un nuevo estudiante:**
-  * Ingreso de ID (numérico) como clave en la tabla hash.
-  * Ingreso de nombre completo.
-  * Ingreso de puntaje socioeconómico (PBM) utilizado para ordenar a los estudiantes en el árbol AVL.
-
-* **Consultar estudiante:**
-  * Búsqueda rápida por ID en tiempo constante O(1) gracias a la tabla hash.
-  * Modificación o eliminación de la información del estudiante.
-
-* **Asignar cupos:**
-  * Ingreso del número de cupos disponibles.
-  * Proceso automático de asignación, priorizando a los estudiantes con puntajes socioeconómicos más bajos. El árbol AVL permite extraer al estudiante con el puntaje más bajo de manera eficiente en O(log n).
-
-* **Listados disponibles:**
-  * Por puntaje socioeconómico en orden ascendente.
-  * Estudiantes con residencia asignada.
-  * Estudiantes sin residencia asignada.
-
 ## Diseño e Implementación
 
 ### Diagrama General del Flujo del Sistema
