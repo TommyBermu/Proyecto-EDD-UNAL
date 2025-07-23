@@ -85,6 +85,8 @@ Los resultados obtenidos confirmaron de forma consistente los comportamientos as
 - Las operaciones sobre el árbol AVL (`insert`, `removeFromAVL`, `replace`) siguieron un patrón O(log n).
 - Las operaciones sobre la tabla hash (`getNode`, `removeFromHashMap`) mostraron tiempos promedio constantes.
 - Las operaciones lineales como `getAllValues` crecieron proporcionalmente a n.
+- Las gráficas log–log de las curvas facilitaron el análisis de los resultados obtenidos.
+
 
 ## Integrantes y Roles
 
