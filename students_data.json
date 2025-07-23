@@ -10,9 +10,24 @@
     "puntaje" : 12,
     "residencia" : true
   }, {
+    "id" : 1234,
+    "nombre" : "holaa",
+    "puntaje" : 34,
+    "residencia" : false
+  }, {
+    "id" : 4556426,
+    "nombre" : "javier castillo",
+    "puntaje" : 54,
+    "residencia" : false
+  }, {
     "id" : 79706714,
     "nombre" : "Jair Bermudez",
     "puntaje" : 56,
+    "residencia" : false
+  }, {
+    "id" : 383838743,
+    "nombre" : "manuela ramirez",
+    "puntaje" : 124,
     "residencia" : false
   } ],
   "cuposDisponibles" : 2

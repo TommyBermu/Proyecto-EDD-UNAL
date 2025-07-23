@@ -58,6 +58,9 @@ public class registerController {
         } catch (NumberFormatException e) {
             lblMessage.setText("Error: ID y Puntaje Socioeconómico deben ser números válidos.");
             lblMessage.setStyle("-fx-text-fill: red;");
+        } catch (IllegalArgumentException e) {
+            lblMessage.setText("Error: El estudiante ya está registrado.");
+            lblMessage.setStyle("-fx-text-fill: red;");
         } catch (Exception e) {
             // Capturar otras excepciones de tu lógica de negocio (ej. ID repetido)
             lblMessage.setText("Error al registrar estudiante: " + e.getMessage());
