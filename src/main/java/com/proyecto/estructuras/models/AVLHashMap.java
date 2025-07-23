@@ -124,14 +124,9 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
         if (node.data.compareTo(data) > 0)
             node.left = insertRec(node.left, data, node, key);
-
-        else if (node.data.compareTo(data) < 0)
+        //Se incluye los estudiantes con PBM repetido
+        else
             node.right = insertRec(node.right, data, node, key);
-
-        else {
-            System.out.println("El valor " + data + " ya existe en el árbol");
-            return node;
-        }
         return rebalance(node, data, true);
     }
     
