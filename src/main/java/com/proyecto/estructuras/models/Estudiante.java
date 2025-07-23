@@ -2,6 +2,7 @@ package com.proyecto.estructuras.models;
 
 public class Estudiante implements Comparable<Estudiante>{
     private int id; // la cedula xd
+
     private String nombre;
     private Integer puntaje;
     private boolean residencia;
