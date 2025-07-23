@@ -1,6 +1,7 @@
 package com.proyecto.estructuras;
 
 import com.proyecto.estructuras.models.Estudiante;
+import com.proyecto.estructuras.models.StudentDataManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -13,7 +14,7 @@ public class consultController {
     @FXML
     private TextField txtSearchId;
     @FXML
-    private Button btnSearch;
+    public Button btnSearch;
     @FXML
     private Label lblMessage;
     @FXML
@@ -29,11 +30,13 @@ public class consultController {
     @FXML
     private HBox actionButtons; // Contenedor para los botones de acción (modificar/eliminar)
     @FXML
-    private Button btnModifyScore;
+    public Button btnModifyScore;
     @FXML
-    private Button btnDeleteStudent;
+    public Button btnDeleteStudent;
 
     private Estudiante currentStudent; // Variable para almacenar el estudiante actualmente consultado
+
+    private final StudentDataManager dataManager = StudentDataManager.getInstance();
 
     @FXML
     public void initialize() {
@@ -61,14 +64,14 @@ public class consultController {
 
         try {
             int id = Integer.parseInt(searchIdText);
-            Estudiante estudianteEncontrado = findStudent(id);
+            Estudiante estudianteEncontrado = dataManager.getEstudiante(id);
 
             if (estudianteEncontrado != null) {
                 currentStudent = estudianteEncontrado;
                 lblStudentId.setText(String.valueOf(currentStudent.getId()));
                 lblFullName.setText(currentStudent.getNombre());
                 lblSocioeconomicScore.setText(String.valueOf(currentStudent.getPuntaje()));
-                lblResidenceStatus.setText(currentStudent.getEstado() ? "Asignada" : "Sin asignar");
+                lblResidenceStatus.setText(currentStudent.getResidencia() ? "Asignada" : "Sin asignar");
 
                 studentDetailsGrid.setVisible(true);
                 studentDetailsGrid.setManaged(true);
@@ -108,9 +111,7 @@ public class consultController {
             try {
                 int newScore = Integer.parseInt(newScoreText);
 
-                // TODO Aquí integrarías con tu estructura de datos para actualizar el puntaje
-                // Importante: Si tu asignación de cupos depende del puntaje, deberías volver a ejecutar la asignación o al menos actualizar su posición en la estructura de datos.
-                // sistemaResidencias.updateStudentScore(currentStudent.getId(), newScore);
+                dataManager.updateEstudiante(currentStudent.getId(), new Estudiante(currentStudent.getId(), currentStudent.getNombre(), newScore, currentStudent.getResidencia()));
 
                 currentStudent.setPuntaje(newScore);
                 lblSocioeconomicScore.setText(String.valueOf(newScore));
@@ -144,8 +145,7 @@ public class consultController {
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
 
-                // TODO Aquí integrarías con tu estructura de datos para eliminar el estudiante
-                // sistemaResidencias.removeStudent(currentStudent.getId());
+                dataManager.removeEstudiante(currentStudent.getId());
 
                 lblMessage.setText("Estudiante " + currentStudent.getNombre() + " eliminado con éxito.");
                 lblMessage.setStyle("-fx-text-fill: green;");
@@ -162,16 +162,5 @@ public class consultController {
                 lblMessage.setStyle("-fx-text-fill: red;");
             }
         }
-    }
-
-    // TODO --- Mock para simular la búsqueda de estudiante ---
-    // ¡REEMPLAZA ESTO CON TU LÓGICA REAL!
-    private Estudiante findStudent(int id) {
-        if (id == 123) {
-            return new Estudiante(123, "Juan Pérez", 50, true);
-        } else if (id == 456) {
-            return new Estudiante(456, "María López", 75, false);
-        }
-        return null;
     }
 }
