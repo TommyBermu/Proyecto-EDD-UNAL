@@ -10,6 +10,11 @@
     "puntaje" : 12,
     "residencia" : true
   }, {
+    "id" : 1234,
+    "nombre" : "holaa",
+    "puntaje" : 34,
+    "residencia" : false
+  }, {
     "id" : 79706714,
     "nombre" : "Jair Bermudez",
     "puntaje" : 56,
