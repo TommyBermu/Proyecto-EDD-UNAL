@@ -34,7 +34,7 @@ El sistema implementa una solución que organiza a los estudiantes por su puntaj
 
 ### Diagrama General del Flujo del Sistema
 
-![Diagrama del flujo del sistema]()  
+![Diagrama del flujo del sistema](https://github.com/TommyBermu/Proyecto-EDD-UNAL/blob/bb969830507ffe8eccf51a5b205f7d567b9571fd/Diagrama%20de%20flujo.png)  
 
 
 ### Clases Principales
