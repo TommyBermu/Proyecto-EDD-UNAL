@@ -47,6 +47,7 @@ public class StudentDataManager {
         } else {
             assert estudiante != null;
             System.err.println("Error: El estudiante con ID " + estudiante.getId() + " ya existe o es nulo.");
+            throw new IllegalArgumentException("El estudiante ya existe o es nulo.");
         }
     }
 
