@@ -66,11 +66,11 @@ Se creó una clase `AVLHashMapBenchmark` para medir el rendimiento de los métod
 
 | Método               | Complejidad Teórica                 | Observación Empírica                                          |
 |----------------------|--------------------------------------|----------------------------------------------------------------|
-| `insert`             | O(log n) individual, O(n log n) total | Crecimiento cercano a O(n log n)                             |
-| `removeFromHashMap`  | O(1) promedio, O(n) peor caso         | Comportamiento casi constante en promedio                    |
+| `insert`             | O(log n) individual                  | Crecimiento cercano a O(log n)                               |
+| `removeFromHashMap`  | O(1) promedio, O(n) peor caso        | Comportamiento casi constante en promedio                    |
 | `removeFromAVL`      | O(log n)                             | Tiempo estable por llamada                                   |
 | `getAllValues`       | O(n)                                 | Tiempo de ejecución aproximadamente lineal                   |
-| `getNode`            | O(1) promedio, O(n) peor caso         | Comportamiento constante promedio                            |
+| `getNode`            | O(1) promedio, O(n) peor caso        | Comportamiento constante promedio                            |
 | `replace`            | O(log n)                             | Crecimiento coherente con O(log n)                           |
 
 ## Conclusiones
