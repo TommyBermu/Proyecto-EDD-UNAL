@@ -124,10 +124,9 @@ public class AVLHashMap<K, V extends Comparable<V>> {
 
         if (node.data.compareTo(data) > 0)
             node.left = insertRec(node.left, data, node, key);
-
+        //Se incluye los estudiantes con PBM repetido
         else
             node.right = insertRec(node.right, data, node, key);
-
         return rebalance(node, data, true);
     }
     
