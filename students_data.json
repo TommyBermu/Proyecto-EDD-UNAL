@@ -1,34 +1,24 @@
 {
   "estudiantes" : [ {
-    "id" : 1011090803,
-    "nombre" : "Tomas Bermudez",
-    "puntaje" : 1,
-    "residencia" : true
-  }, {
-    "id" : 52494204,
-    "nombre" : "Deisy Guaqueta",
-    "puntaje" : 12,
+    "id" : 12345,
+    "nombre" : "julain velandia",
+    "puntaje" : 25,
     "residencia" : true
   }, {
     "id" : 1234,
     "nombre" : "holaa",
     "puntaje" : 34,
-    "residencia" : false
+    "residencia" : true
   }, {
     "id" : 4556426,
     "nombre" : "javier castillo",
     "puntaje" : 54,
-    "residencia" : false
-  }, {
-    "id" : 79706714,
-    "nombre" : "Jair Bermudez",
-    "puntaje" : 56,
-    "residencia" : false
+    "residencia" : true
   }, {
     "id" : 383838743,
     "nombre" : "manuela ramirez",
     "puntaje" : 124,
     "residencia" : false
   } ],
-  "cuposDisponibles" : 2
+  "cuposDisponibles" : 3
 }

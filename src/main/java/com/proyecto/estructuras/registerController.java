@@ -33,8 +33,6 @@ public class registerController {
         String fullName = txtFullName.getText();
         String scoreText = txtSocioeconomicScore.getText();
 
-        // TODO **Tu lógica de validación e implementación aquí**, por ejemplo:
-
         if (idText.isEmpty() || fullName.isEmpty() || scoreText.isEmpty()) {
             lblMessage.setText("Error: Todos los campos son obligatorios.");
             lblMessage.setStyle("-fx-text-fill: red;");
